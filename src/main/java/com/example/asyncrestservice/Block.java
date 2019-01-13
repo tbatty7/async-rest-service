@@ -14,4 +14,8 @@ public class Block {
     private String texture;
     private boolean pick_drops_block;
     private String value;
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }
