@@ -13,8 +13,8 @@ public class Controller {
     @RequestMapping(value = "/sand", method = RequestMethod.GET)
     public String addSand(){
 
-        String sql = "INSERT INTO block( name, texture, dropsblock ) VALUES ( ?, ?, ? )";
-        Object[] arguments = {"sand2", "tan2", true};
+        String sql = "INSERT INTO block( name, texture, pick_drops_block ) VALUES ( ?, ?, ? )";
+        Object[] arguments = {"sand", "tan", false};
         jdbc.update(sql, arguments);
         return "submitted";
     }
@@ -22,7 +22,7 @@ public class Controller {
     @RequestMapping(value = "/stone", method = RequestMethod.GET)
     public String addStone(){
 
-        String sql = "INSERT INTO block( name, texture, dropsblock ) VALUES ( ?, ?, ? )";
+        String sql = "INSERT INTO block( name, texture, pick_drops_block ) VALUES ( ?, ?, ? )";
         Object[] arguments = {"stone", "grey", true};
         jdbc.update(sql, arguments);
         return "submitted";
@@ -31,9 +31,9 @@ public class Controller {
     @RequestMapping(value = "/block", method = RequestMethod.POST)
     public String addBlock(@RequestBody BlockRequest request){
 
-        Object[] arguments = {request.name, request.texture, request.dropsblock};
+        Object[] arguments = {request.name, request.texture, request.dropsBlock};
 
-        String sql = "INSERT INTO block( name, texture, dropsblock ) VALUES (?,?,?)";
+        String sql = "INSERT INTO block( name, texture, pick_drops_block ) VALUES (?,?,?)";
         jdbc.update(sql, arguments);
         return "submitted";
     }

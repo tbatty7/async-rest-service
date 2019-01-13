@@ -12,6 +12,6 @@ public class Block {
     private long id;
     private String name;
     private String texture;
-    private String dropsblock;
+    private boolean pick_drops_block;
     private String value;
 }
