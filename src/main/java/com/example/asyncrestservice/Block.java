@@ -13,4 +13,5 @@ public class Block {
     private String name;
     private String texture;
     private String dropsblock;
+    private String value;
 }
