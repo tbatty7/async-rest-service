@@ -27,9 +27,9 @@ public abstract class ReflectiveVisitor {
             Class[] interfaces = source.getInterfaces();
             for (Class intrface : interfaces) {
                 String interfaceName = intrface.getName();
-                interfaceName = "visit" + interfaceName.substring(interfaceName.lastIndexOf('.') + 1);
+                String interfaceMethodName = "visit" + interfaceName.substring(interfaceName.lastIndexOf('.') + 1);
                 try {
-                    methodName = getClass().getMethod(interfaceName, intrface);
+                    methodName = getClass().getMethod(interfaceMethodName, intrface);
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
                 }

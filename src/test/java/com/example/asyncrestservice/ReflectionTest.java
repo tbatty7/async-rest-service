@@ -1,6 +1,7 @@
 package com.example.asyncrestservice;
 
 import com.example.asyncrestservice.reflective.visitor.pattern.TheOther;
+import com.example.asyncrestservice.reflective.visitor.pattern.This;
 import com.example.asyncrestservice.reflective.visitor.pattern.UpVisitor;
 import org.junit.Test;
 
@@ -70,6 +71,15 @@ public class ReflectionTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void getInterfaces() {
+        Class<?>[] interfaces = This.class.getInterfaces();
+        int length = interfaces.length;
+        System.out.printf("There are " + length + " interfaces. \n");
+        String name = interfaces[0].getName();
+        System.out.printf("The interface is named " + name);
     }
 
     public void runTest(String arg) {
