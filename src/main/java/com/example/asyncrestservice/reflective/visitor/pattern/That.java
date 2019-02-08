@@ -7,6 +7,6 @@ public class That implements Element {
     }
 
     public String that() {
-        return "That";
+        return "That\n";
     }
 }

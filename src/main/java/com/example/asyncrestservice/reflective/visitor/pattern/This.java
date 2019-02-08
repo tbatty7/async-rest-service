@@ -7,6 +7,6 @@ public class This implements Element {
     }
 
     public String thiss() {
-        return "This";
+        return "This\n";
     }
 }

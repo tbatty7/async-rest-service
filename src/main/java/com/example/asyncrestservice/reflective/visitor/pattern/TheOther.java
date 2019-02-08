@@ -7,6 +7,6 @@ public class TheOther implements Element {
     }
 
     public String theOther() {
-        return "TheOther method in TheOther class";
+        return "TheOther method in TheOther class\n";
     }
 }

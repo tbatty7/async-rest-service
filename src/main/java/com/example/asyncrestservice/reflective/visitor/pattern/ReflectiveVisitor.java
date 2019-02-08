@@ -6,42 +6,46 @@ public abstract class ReflectiveVisitor {
      abstract public void visit(Object object);
 
     public void visitTheOther(TheOther e) {
-        System.out.println("ReflectiveVisitor: do Base on " + e.theOther());
+        System.out.println("ReflectiveVisitor: do Base on " + e.theOther() + "\n");
     }
 
     protected Method getMethod(Class source) {
         Class clazz = source;
-        Method methodName = null;
+        Method methodToReturn = null;
 
-        while (methodName == null && clazz != Object.class) {
+        while (methodToReturn == null && clazz != Object.class) {
             String clazzname = clazz.getName();
-            String classMethodName = "visit" + clazzname.substring(clazzname.lastIndexOf('.') + 1);
+            System.out.printf("Now object is: " + clazzname + "\n");
+            String methodName = "visit" + clazzname.substring(clazzname.lastIndexOf('.') + 1);
             try {
-                methodName = getClass().getMethod(classMethodName, clazz);
+                System.out.printf("getClass called by ReflectiveVisitor returns " + getClass().getName() + "\n");
+                methodToReturn = getClass().getMethod(methodName, clazz);
             } catch (NoSuchMethodException e) {
                 clazz = clazz.getSuperclass();
             }
         }
         if (clazz == Object.class) {
-            System.out.printf("Searching for interfaces...");
+            System.out.printf("Searching for interfaces...\n");
             Class[] interfaces = source.getInterfaces();
             for (Class intrface : interfaces) {
                 String interfaceName = intrface.getName();
                 String interfaceMethodName = "visit" + interfaceName.substring(interfaceName.lastIndexOf('.') + 1);
                 try {
-                    methodName = getClass().getMethod(interfaceMethodName, intrface);
+                    System.out.printf("Interface method name of: " + interfaceMethodName + "\n");
+                    methodToReturn = getClass().getMethod(interfaceMethodName, intrface);
                 } catch (NoSuchMethodException e) {
+                    System.out.printf("No method named " + interfaceMethodName + "in " + getClass().getName() + "\n");
                     e.printStackTrace();
                 }
             }
         }
-        if (methodName == null) {
+        if (methodToReturn == null) {
             try {
-                methodName = getClass().getMethod("visitObject", Object.class);
+                methodToReturn = getClass().getMethod("visitObject", Object.class);
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
         }
-        return methodName;
+        return methodToReturn;
     }
 }

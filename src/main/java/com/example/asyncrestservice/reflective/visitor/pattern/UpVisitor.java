@@ -8,7 +8,7 @@ public class UpVisitor extends ReflectiveVisitor {
         try {
             getMethod(object.getClass()).invoke(this, object);
         } catch (Exception e) {
-            System.out.printf("UpVisitor: no appropriate visit method");
+            System.out.printf("UpVisitor: no appropriate visit method\n");
         }
     }
 
@@ -17,6 +17,6 @@ public class UpVisitor extends ReflectiveVisitor {
     }
 
     public void visitObject(Object o) {
-        System.out.printf("UpVisitor generic visitObject() method");
+        System.out.printf("UpVisitor generic visitObject() method \n");
     }
 }
