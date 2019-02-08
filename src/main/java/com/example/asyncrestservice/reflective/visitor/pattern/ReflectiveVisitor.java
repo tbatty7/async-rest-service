@@ -34,7 +34,7 @@ public abstract class ReflectiveVisitor {
                     System.out.printf("Interface method name of: " + interfaceMethodName + "\n");
                     methodToReturn = getClass().getMethod(interfaceMethodName, intrface);
                 } catch (NoSuchMethodException e) {
-                    System.out.printf("No method named " + interfaceMethodName + "in " + getClass().getName() + "\n");
+                    System.out.printf("No method named " + interfaceMethodName + " in " + getClass().getName() + "\n");
                     e.printStackTrace();
                 }
             }
@@ -42,6 +42,7 @@ public abstract class ReflectiveVisitor {
         if (methodToReturn == null) {
             try {
                 methodToReturn = getClass().getMethod("visitObject", Object.class);
+                System.out.printf("It found the visitObject Method in " + getClass().getName());
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
