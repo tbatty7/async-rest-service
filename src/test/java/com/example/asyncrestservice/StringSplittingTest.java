@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class StringSplittingTest {
 
@@ -13,23 +14,19 @@ public class StringSplittingTest {
 
     @Test
     public void extractSubstringWithSplit() {
-        String catalogId = getCatalogId(text);
+        String catalogId = new StringUnmarshaller().getCatalogId(text);
         assertEquals("very", catalogId);
     }
 
-    private String getCatalogId(String xml) {
-        String openingTag = "Catalog>";
-        int startingIndexOfCatalogId = xml.indexOf(openingTag) + openingTag.length();
-        String catalogId = xml.substring(startingIndexOfCatalogId);
-        String closingTag = "<";
-        return catalogId.substring(0, catalogId.indexOf(closingTag));
-    }
-
     @Test
-    public void extractSubstringWithRegex() {
+    public void extractSubstringWithRegexIsMoreBrittle() {
         Pattern pattern = Pattern.compile("(Catalog>(.*)<)");
         Matcher matcher = pattern.matcher(text);
         matcher.find();
-        assertEquals("very", matcher.group(2));
+        assertFalse(matchesString("very", matcher.group(2)));
+    }
+
+    private boolean matchesString(String expected, String actual) {
+        return expected == actual;
     }
 }
